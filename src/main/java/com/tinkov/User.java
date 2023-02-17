@@ -8,7 +8,15 @@ public class User {
 
     public User(String login, String email) {
         this.login = login;
-        this.email = email;
+        if (email.contains("@") && email.contains(".")) {
+            this.email = email;
+        } else {
+            throw new EmailException("Не верно указан email");
+        }
+    }
+
+    public User() {
+        throw new EmailException("Не заполнены поля");
     }
 
     public String getLogin() {
@@ -16,24 +24,14 @@ public class User {
     }
 
     public String getEmail() {
-        String s = email;
-        if (s.contains("@")) {
-            return s;
-        } else {
-            System.out.println("Не верно указан email");
-        }
-        if (s.contains(".")) {
-            return s;
-        } else {
-            System.out.println("Не верно указан email");
-        }
-        return s;
+        return email;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof User user)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
         return Objects.equals(login, user.login) && Objects.equals(email, user.email);
     }
 

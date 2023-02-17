@@ -3,10 +3,11 @@ package com.tinkov;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
 
 public class UserTest {
     @Test
-    @DisplayName("When login and email to user return correct")
+    @DisplayName("Проверка ввода логина и email")
     public void correctLoginEmailTest() {
         User user = new User("Vasya", "Vasya123@mail.com");
         String actualResult = user.getLogin() + " " + user.getEmail();
@@ -15,7 +16,18 @@ public class UserTest {
     }
 
     @Test
-    @DisplayName("When email is correct")
+    @DisplayName("Проверка пустых полей")
+    public void correctLoginEmailIsEmptyTest() {
+        try {
+            User user = new User();
+        } catch (EmailException e)
+        {
+            return;
+        }
+    }
+
+    @Test
+    @DisplayName("Проверка некорректного ввода email")
     public void correctEmailTest() {
         User user = new User("Vasya", "Vasya123@mail.com");
         String actualResult = user.getLogin() + " " + user.getEmail();
@@ -24,11 +36,9 @@ public class UserTest {
     }
 
     @Test
-    @DisplayName("When not equals login and email")
+    @DisplayName("Проверка равен ли логин email")
     public void notEqualsLoginEmailTest() {
         User user = new User("Vasya", "Vasya123@mail.com");
-        String actualResult = user.getLogin() + " " + user.getEmail();
-        Assertions.assertNotNull(actualResult);
-        Assertions.assertEquals("Vasya Vasya123@mail.com", actualResult);
+        Assertions.assertNotEquals(user.getLogin(), user.getEmail());
     }
 }
