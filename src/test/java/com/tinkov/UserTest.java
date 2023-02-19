@@ -3,7 +3,6 @@ package com.tinkov;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.function.Executable;
 
 public class UserTest {
     @Test
@@ -18,12 +17,10 @@ public class UserTest {
     @Test
     @DisplayName("Проверка пустых полей")
     public void correctLoginEmailIsEmptyTest() {
-        try {
-            User user = new User();
-        } catch (EmailException e)
-        {
-            return;
-        }
+        User user = new User();
+        Assertions.assertNull(user.getLogin());
+        Assertions.assertNull(user.getEmail());
+//        Assertions.assertThrows(LoginAndEmailVerificationException.class, () -> new User());
     }
 
     @Test

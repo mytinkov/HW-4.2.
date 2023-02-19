@@ -7,16 +7,22 @@ public class User {
     private final String email;
 
     public User(String login, String email) {
-        this.login = login;
+        if (!login.equals(email)) {
+            this.login = login;
+        } else {
+            throw new LoginAndEmailVerificationException("Логин и email не могут быть одинаковыми");
+        }
         if (email.contains("@") && email.contains(".")) {
             this.email = email;
         } else {
-            throw new EmailException("Не верно указан email");
+            throw new LoginAndEmailVerificationException("Не верно указан email");
         }
     }
 
     public User() {
-        throw new EmailException("Не заполнены поля");
+       this.login = null;
+       this.email = null;
+//       throw new LoginAndEmailVerificationException("Не заполнены поля");
     }
 
     public String getLogin() {
