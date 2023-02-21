@@ -3,6 +3,7 @@ package com.tinkov;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
 
 public class UserTest {
     @Test
@@ -35,7 +36,8 @@ public class UserTest {
     @Test
     @DisplayName("Проверка равен ли логин email")
     public void notEqualsLoginEmailTest() {
-        User user = new User("Vasya", "Vasya123@mail.com");
-        Assertions.assertNotEquals(user.getLogin(), user.getEmail());
+       // User user = new User("vasa", "Vasya123@mail.com");
+        Assertions.assertThrows(LoginAndEmailVerificationException.class, () -> new User("vasy499", "vasy499"));
+
     }
 }
